@@ -1,8 +1,8 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.content_dieu_khien.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,8 +11,11 @@ class ControlActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /** Set màn sẽ điều khiển*/
         setContentView(R.layout.activity_dieu_khien)
+
         init()
+
         setupViews()
     }
 

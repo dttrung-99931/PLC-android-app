@@ -103,15 +103,16 @@
             android:layout_width="@dimen/_40sdp"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:layout_marginStart="@dimen/_20sdp"/>
+            android:layout_marginStart="@dimen/_20sdp"
+            android:text="10"/>
 
         <Button
             android:id="@+id/btnOkTssc1"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_30sdp"
-            android:text="OK"
             android:layout_marginStart="@dimen/_10sdp"
-            android:padding="0dp"/>
+            android:padding="0dp"
+            android:text="OK" />
 
     </LinearLayout>
 
