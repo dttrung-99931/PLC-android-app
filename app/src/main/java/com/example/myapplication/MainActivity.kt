@@ -11,17 +11,28 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dang_nhap)
-        setupViews();
+
+        /** Cài đặt xử lý khi btnDN (phím đăng nhập) được ấn*/
+        setOnBtnLoginClicked()
     }
 
-    private fun setupViews() {
+    private fun setOnBtnLoginClicked() {
+        /**
+         * Đăng ký nhận sự kiện khi phím đăng nhập được ấn
+         * khi ấn phìm đăng nhập, khối code trong dấu {} sẽ đươc thực thi
+         * */
         btnDn.setOnClickListener {
+            /** Lấy username và password đã nhập*/
             val username = edtUsername.text.toString()
             val pwd = edtPwd.text.toString()
-            if (username == "nhom3" && pwd == "1234"){
+
+            /** Kiếm tra đăng nhập*/
+            if (username == "nhom3" && pwd == "1234"){ // Nếu đúng username && password
+                /** Chuyển qua màn hình điểu khiển*/
                 startActivity(Intent(this, ControlActivity::class.java))
                 finish()
-            } else {
+            } else { /** Nếu sai username or password*/
+                /** Thông báo "Login failed"*/
                 Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
             }
         }
