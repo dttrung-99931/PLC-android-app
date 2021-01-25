@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat
 
 /**
  * Created by Trung on 1/25/2021
+ *
+ * Dùng để để load dữ liệu report hiển thị lên giao diện
  */
 class ReportAdapter : RecyclerView.Adapter<ReportAdapter.ReportViewHolder>() {
     val simpleDataFormatter = SimpleDateFormat("HH:mm:ss")

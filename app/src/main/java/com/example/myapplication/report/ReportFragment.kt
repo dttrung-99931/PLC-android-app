@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.fragment_report.*
 
 /**
  * Created by Trung on 1/25/2021
+ *
+ * Màn hình báo cáo danh sách các tsc1, tsc2 theo thời gian
  */
 class ReportFragment: Fragment() {
     private lateinit var mainActivity: MainActivity
@@ -23,6 +25,7 @@ class ReportFragment: Fragment() {
         mainActivity = context as MainActivity
     }
 
+    /** Cài giaoo diện điều khiển*/
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,8 +34,12 @@ class ReportFragment: Fragment() {
         return inflater.inflate(R.layout.fragment_report, container, false)
     }
 
+    /** Cài đặt các giao diện thành phần*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        /** Cài đặt danh sách report*/
         setupReportRecyclerView()
+
+        /** Reload dữ liệu khi thao tác kéo tay từ trên xuống (pull)*/
         mRefreshLayout.setOnRefreshListener {
             refresh()
             mRefreshLayout.isRefreshing = false
@@ -40,12 +47,15 @@ class ReportFragment: Fragment() {
                 mBtnLoadReport.visibility = View.GONE
             }
         }
+
+        /** Cài load dữ khi ấn button 'load report' */
         mBtnLoadReport.setOnClickListener {
             refresh()
             mBtnLoadReport.visibility = View.GONE
         }
     }
 
+    /** Cài đặt adapter để load liệu hiển thị vào giao diện*/
     val reportAdapter = ReportAdapter()
     private fun setupReportRecyclerView() {
         mRecyclerView.adapter =  reportAdapter
@@ -53,6 +63,7 @@ class ReportFragment: Fragment() {
         refresh()
     }
 
+    /** Refresh lại list report*/
     private fun refresh() {
         reportAdapter.setReportData(mainActivity.reportData)
     }

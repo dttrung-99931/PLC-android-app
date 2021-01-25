@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_graph.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+/** Màn hình biểu đồ*/
 class GraphFragment : Fragment(), OnChartValueSelectedListener {
     private lateinit var mainActivity: MainActivity
 
@@ -29,6 +30,7 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
         observeDataChange()
     }
 
+    /** Cài đặt chọn giao diện [fragment_graph] để điều khiển */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,6 +49,7 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
     private var times = mutableListOf<Long>()
     private val handler = Handler()
 
+    /** Cài đặ biểu đồ: các đường biểu đồ, trục x, y, màu sắc */
     private fun setupChart() {
 
         chart.setOnChartValueSelectedListener(this)
@@ -59,20 +62,11 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
         addDataSet("Tsc1", Color.BLACK)
         addDataSet("Tsc2", Color.BLUE)
 
+        /** Bắt đầu thêm dữ liệu vào biểu đồ liên tục*/
         handler.postDelayed(::repeatAddGraphData, 1000)
     }
 
-    private var tsc1: Float? = null
-    private var tsc2: Float? = null
-    private fun observeDataChange() {
-        mainActivity.tsc1LD.observe(this, androidx.lifecycle.Observer {
-            tsc1 = it
-        })
-        mainActivity.tsc2LD.observe(this, androidx.lifecycle.Observer {
-            tsc2 = it
-        })
-    }
-
+    /** Cài đặt các trục tọa đồ cho biểu đò*/
     private fun setupAxises() {
         chart.axisRight.mAxisMaximum = 100f
         chart.axisLeft.mAxisMaximum = 100f
@@ -86,6 +80,7 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
         }
     }
 
+    /** Liên tục load thêm dữ liệu cho biểu đồ sau mỗi s1 */
     private fun repeatAddGraphData() {
         if (tsc1 != null || tsc2 != null) {
             times.add(System.currentTimeMillis())
@@ -111,6 +106,19 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
             chart.moveViewTo(data.entryCount - 7.toFloat(), 50f, AxisDependency.LEFT)
         }
         handler.postDelayed(::repeatAddGraphData, 1000)
+    }
+
+    private var tsc1: Float? = null
+    private var tsc2: Float? = null
+
+    /** Lắng nghe để cập nhật các giá trị tsc1, tsc2*/
+    private fun observeDataChange() {
+        mainActivity.tsc1LD.observe(this, androidx.lifecycle.Observer {
+            tsc1 = it
+        })
+        mainActivity.tsc2LD.observe(this, androidx.lifecycle.Observer {
+            tsc2 = it
+        })
     }
 
     private fun addDataSet(dataSetName: String, color: Int) {
