@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:showIn="@layout/activity_dieu_khien">
+    tools:showIn="@layout/fragment_dieu_khien">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -103,8 +103,7 @@
             android:layout_width="@dimen/_40sdp"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:text="10"/>
+            android:layout_marginStart="@dimen/_20sdp" />
 
         <Button
             android:id="@+id/btnOkTssc1"

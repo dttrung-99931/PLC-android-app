@@ -1,21 +1,38 @@
 package com.example.myapplication
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.content_dieu_khien.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ControlActivity : AppCompatActivity() {
+/**
+ * Created by Trung on 1/25/2021
+ */
+class ControlFragment: Fragment() {
+    private lateinit var mainActivity: MainActivity
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        /** Set màn sẽ điều khiển*/
-        setContentView(R.layout.activity_dieu_khien)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_dieu_khien, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         init()
-
         setupViews()
     }
 
@@ -28,7 +45,7 @@ class ControlActivity : AppCompatActivity() {
     /** Khởi tạo [apiService] và [handler] khi mở màn hình điều khiển (tức là sau khi đăng nhập thành công) */
     private fun init() {
         apiService = Retrofit.Builder()
-            .baseUrl("http://1.52.251.245/awp/")
+            .baseUrl("http://1.55.84.88/awp/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
@@ -83,6 +100,10 @@ class ControlActivity : AppCompatActivity() {
             /** Lây giá trị tsc1(tần số cấp 1) đã được nhập*/
             val tsc1: Int = edtTssc1.text.toString().toInt()
 
+            if (tsc1 > 60) {
+                showWarningDialog(R.string.warning_tan_so)
+                return@setOnClickListener
+            }
             /** Gọi API set tsc1*/
             apiService.setTssc1(tsc1).enqueue(
                 object : StringCallback<String?>() {
@@ -95,6 +116,17 @@ class ControlActivity : AppCompatActivity() {
         }
 
         updateTsoC1()
+    }
+
+    private lateinit var alertDialog: AlertDialog
+    private fun showWarningDialog(msgRes: Int) {
+        if (!::alertDialog.isInitialized) {
+            alertDialog = AlertDialog.Builder(requireContext())
+                .setNegativeButton("OK", null)
+                .create()
+        }
+        alertDialog.setMessage(getString(msgRes))
+        alertDialog.show()
     }
 
     private fun updateTsoC1() {
@@ -110,6 +142,10 @@ class ControlActivity : AppCompatActivity() {
                     {updateTsoC1() },
                     1000
                 )
+
+                mainActivity.tsc1LD.postValue(
+                    response.toFloat()
+                )
             }
         })
     }
@@ -117,6 +153,11 @@ class ControlActivity : AppCompatActivity() {
     private fun setupViewTsoC2() {
         btnOkTsc2.setOnClickListener {
             val tsc2: Int = edtTsc2.text.toString().toInt()
+            if (tsc2 > 60) {
+                showWarningDialog(R.string.warning_tan_so)
+                return@setOnClickListener
+            }
+
             apiService.setTssc2(tsc2).enqueue(
                 object : StringCallback<String?>() {
                     override fun onSuccessResponse(response: String) {
@@ -135,6 +176,9 @@ class ControlActivity : AppCompatActivity() {
                 handler.postDelayed(
                     {updateTsoC2() },
                     1000
+                )
+                mainActivity.tsc2LD.postValue(
+                    response.toFloat()
                 )
             }
         })
