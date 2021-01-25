@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -14,12 +13,11 @@ import kotlinx.android.synthetic.main.activity_main.*
  * Màn hình này chữa [ControlFragment], [GraphFragment] và [ReportFragment]
  */
 class MainActivity: AppCompatActivity() {
-    /** 2 biến lưu tsc1 và tsc2 truyền từ [ControlFragment] lên*/
-    val tsc1LD = MutableLiveData<Float>()
-    val tsc2LD = MutableLiveData<Float>()
+    /** 2 biến lưu ts truyền từ [GraphFragment] lên*/
+    val tsLD = MutableLiveData<Float>()
 
     /** Lưu dữ liệu report, được sử dụng ở [ReportFragment]*/
-    val reportData = mutableMapOf<Long, Pair<Float?, Float?>>()
+    val reportData = mutableMapOf<Long, Float>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,25 +26,11 @@ class MainActivity: AppCompatActivity() {
         observeToGatherReportData()
     }
 
-    /** Cập nhật [tsc1LD] và [tsc2LD] lấy từ [ControlFragment] truyền lên*/
+    /** Lưu lại các [tsLD] lấy từ [GraphFragment] truyền lên*/
     private fun observeToGatherReportData() {
-        tsc1LD.observe(this, Observer {
+        tsLD.observe(this, Observer {
             val curSec = getCurrentSeconds()
-            val tsc1Tsc2Pair = reportData[curSec]
-            if (tsc1Tsc2Pair != null) {
-                reportData[curSec] = Pair(it, tsc1Tsc2Pair.second)
-            } else {
-                reportData[curSec] = Pair(it, null)
-            }
-        })
-        tsc1LD.observe(this, Observer {
-            val curSec = getCurrentSeconds()
-            val tsc1Tsc2Pair = reportData[curSec]
-            if (tsc1Tsc2Pair != null) {
-                reportData[curSec] = Pair(tsc1Tsc2Pair.first, it)
-            } else {
-                reportData[curSec] = Pair(null, it)
-            }
+            reportData[curSec] = it
         })
     }
 

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.MainActivity
@@ -59,13 +58,17 @@ class ReportFragment: Fragment() {
     val reportAdapter = ReportAdapter()
     private fun setupReportRecyclerView() {
         mRecyclerView.adapter =  reportAdapter
-        mRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        mRecyclerView.layoutManager = LinearLayoutManager(requireContext()).apply {
+            reverseLayout = true
+            stackFromEnd = true
+        }
         refresh()
     }
 
     /** Refresh lại list report*/
     private fun refresh() {
-        reportAdapter.setReportData(mainActivity.reportData)
+        reportAdapter.setReportData(mainActivity.reportData.toList())
+        mRecyclerView.scrollToPosition(reportAdapter.itemCount - 1)
     }
 
 }

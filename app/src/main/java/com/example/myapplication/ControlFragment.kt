@@ -8,9 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.myapplication.api.api
 import kotlinx.android.synthetic.main.content_dieu_khien.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by Trung on 1/25/2021
@@ -39,17 +38,8 @@ class ControlFragment: Fragment() {
     /** Dùng để lập lịch gọi lại các API sau mỗi 1 giây*/
     private lateinit var handler: Handler
 
-    /** Dùng để gọi các API lấy dữ liệu từ server*/
-    private lateinit var apiService: ApiService
-
-    /** Khởi tạo [apiService] và [handler] khi mở màn hình điều khiển (tức là sau khi đăng nhập thành công) */
+    /** Khởi tạo [api] và [handler] khi mở màn hình điều khiển (tức là sau khi đăng nhập thành công) */
     private fun init() {
-        apiService = Retrofit.Builder()
-            .baseUrl("http://1.55.84.88/awp/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ApiService::class.java)
-
         handler = Handler()
     }
 
@@ -72,7 +62,7 @@ class ControlFragment: Fragment() {
 
     private fun updateAnalogAndDigital() {
         /** Goi API giá trị analog */
-        apiService.getAnalog().enqueue(object : StringCallback<String?>() {
+        api.getAnalog().enqueue(object : StringCallback<String?>() {
             /** Hàm này được gọi để nhận giá trị analog, khi gọi thành công API */
             override fun onSuccessResponse(analogValue: String) {
                 /** Cập nhật giá trị analog nhận được từ API*/
@@ -81,7 +71,7 @@ class ControlFragment: Fragment() {
         })
 
         /** Tương tự như API lấy giá trị analog bên trên*/
-        apiService.getDigital().enqueue(object : StringCallback<String?>() {
+        api.getDigital().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
                 tvDigital.text = response
             }
@@ -105,7 +95,7 @@ class ControlFragment: Fragment() {
                 return@setOnClickListener
             }
             /** Gọi API set tsc1*/
-            apiService.setTssc1(tsc1).enqueue(
+            api.setTssc1(tsc1).enqueue(
                 object : StringCallback<String?>() {
                     override fun onSuccessResponse(response: String) {
                         /** Gọi hàm update tần số cấp 1 khi gọi API set tsc1 thành công*/
@@ -131,7 +121,7 @@ class ControlFragment: Fragment() {
 
     private fun updateTsoC1() {
         /** Gọi API lấy tần số cấp 1*/
-        apiService.getTssc1().enqueue(object : StringCallback<String?>() {
+        api.getTssc1().enqueue(object : StringCallback<String?>() {
             /** Hàm được gọi khi API tsc1 trả về kết quả*/
             override fun onSuccessResponse(response: String) {
                 /** Cập nhật tần số cấp 1 trả vể về từ API lên giao diện*/
@@ -141,10 +131,6 @@ class ControlFragment: Fragment() {
                 handler.postDelayed(
                     {updateTsoC1() },
                     1000
-                )
-
-                mainActivity.tsc1LD.postValue(
-                    response.toFloat()
                 )
             }
         })
@@ -158,7 +144,7 @@ class ControlFragment: Fragment() {
                 return@setOnClickListener
             }
 
-            apiService.setTssc2(tsc2).enqueue(
+            api.setTssc2(tsc2).enqueue(
                 object : StringCallback<String?>() {
                     override fun onSuccessResponse(response: String) {
                         updateTsoC2()
@@ -170,15 +156,12 @@ class ControlFragment: Fragment() {
     }
 
     private fun updateTsoC2() {
-        apiService.getTsc2().enqueue(object : StringCallback<String?>() {
+        api.getTsc2().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
                 tvTsc2.text = response
                 handler.postDelayed(
                     {updateTsoC2() },
                     1000
-                )
-                mainActivity.tsc2LD.postValue(
-                    response.toFloat()
                 )
             }
         })
@@ -187,7 +170,7 @@ class ControlFragment: Fragment() {
     private fun setupViewBatDc() {
         swDcc.setOnCheckedChangeListener { buttonView, isChecked ->
             val bat: Int = if (isChecked) 1 else 0
-            apiService.setBatDc(bat).enqueue(
+            api.setBatDc(bat).enqueue(
                 object : StringCallback<String?>() {
                     override fun onSuccessResponse(response: String) {
                         updateBatDc()
@@ -199,7 +182,7 @@ class ControlFragment: Fragment() {
     }
 
     private fun updateBatDc() {
-        apiService.getBatDc().enqueue(object : StringCallback<String?>() {
+        api.getBatDc().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
                 val bat = response == "1"
                 cbDcc.isChecked = bat
@@ -214,7 +197,7 @@ class ControlFragment: Fragment() {
     private fun setupViewTatDc() {
         swTdc.setOnCheckedChangeListener { buttonView, isChecked ->
             val bat: Int = if (isChecked) 1 else 0
-            apiService.setTatDc(bat).enqueue(
+            api.setTatDc(bat).enqueue(
                 object : StringCallback<String?>() {
                     override fun onSuccessResponse(response: String) {
                         updateTatDc()
@@ -226,7 +209,7 @@ class ControlFragment: Fragment() {
     }
 
     private fun updateTatDc() {
-        apiService.getTatDc().enqueue(object : StringCallback<String?>() {
+        api.getTatDc().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
                 val tat = response == "1"
                 cbTdc.isChecked = tat

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.api
 
 import retrofit2.Call
 import retrofit2.http.Field
@@ -38,6 +38,9 @@ interface ApiService {
 
     @GET("rs_value_c2.html")
     fun getTsc2(): Call<String>
+
+    @GET("Tam.html")
+    fun getTs(): Call<String>
 
     @GET("rs_analog.html")
     fun getAnalog(): Call<String>

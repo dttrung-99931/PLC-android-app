@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.example.myapplication.MainActivity
+import com.example.myapplication.StringCallback
+import com.example.myapplication.api.api
 import com.github.mikephil.charting.components.YAxis.AxisDependency
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -27,7 +29,7 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
-        observeDataChange()
+        repeatUpdateTs()
     }
 
     /** Cài đặt chọn giao diện [fragment_graph] để điều khiển */
@@ -59,8 +61,7 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
         chart.data = LineData()
 
         setupAxises()
-        addDataSet("Tsc1", Color.BLACK)
-        addDataSet("Tsc2", Color.BLUE)
+        addDataSet("Tần số", Color.BLACK)
 
         /** Bắt đầu thêm dữ liệu vào biểu đồ liên tục*/
         handler.postDelayed(::repeatAddGraphData, 1000)
@@ -82,22 +83,16 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
 
     /** Liên tục load thêm dữ liệu cho biểu đồ sau mỗi s1 */
     private fun repeatAddGraphData() {
-        if (tsc1 != null || tsc2 != null) {
+        if (ts != null) {
             times.add(System.currentTimeMillis())
 
             val data = chart.data
 
-            tsc1?.let {
+            ts?.let {
                 data.addEntry(
                     Entry((times.size - 1).toFloat(), it), 0
                 )
             }
-            tsc2?.let {
-                data.addEntry(
-                    Entry((times.size - 1).toFloat(), it), 1
-                )
-            }
-
             data.notifyDataChanged()
 
             chart.notifyDataSetChanged()
@@ -105,20 +100,21 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
 
             chart.moveViewTo(data.entryCount - 7.toFloat(), 50f, AxisDependency.LEFT)
         }
+
         handler.postDelayed(::repeatAddGraphData, 1000)
     }
 
-    private var tsc1: Float? = null
-    private var tsc2: Float? = null
+    private var ts: Float? = null
 
     /** Lắng nghe để cập nhật các giá trị tsc1, tsc2*/
-    private fun observeDataChange() {
-        mainActivity.tsc1LD.observe(this, androidx.lifecycle.Observer {
-            tsc1 = it
+    private fun repeatUpdateTs() {
+        api.getTs().enqueue(object : StringCallback<String?>() {
+            override fun onSuccessResponse(response: String) {
+                ts = response.toFloat()
+                mainActivity.tsLD.postValue(ts)
+            }
         })
-        mainActivity.tsc2LD.observe(this, androidx.lifecycle.Observer {
-            tsc2 = it
-        })
+        handler.postDelayed(::repeatUpdateTs, 1000)
     }
 
     private fun addDataSet(dataSetName: String, color: Int) {
