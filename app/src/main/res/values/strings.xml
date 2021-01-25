@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">PLC APP - Nhom 3</string>
     <string name="control">Control</string>
     <string name="graph">Graph</string>
     <string name="warning_tan_so">Tần số phải <![CDATA[<= 60hz]]></string>

@@ -56,7 +56,7 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
         chart.data = LineData()
 
         setupAxises()
-        addDataSet("Tsc1", Color.CYAN)
+        addDataSet("Tsc1", Color.BLACK)
         addDataSet("Tsc2", Color.BLUE)
 
         handler.postDelayed(::repeatAddGraphData, 1000)

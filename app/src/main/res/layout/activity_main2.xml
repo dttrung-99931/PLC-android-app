@@ -16,6 +16,6 @@
         android:layout_height="wrap_content"
         app:menu="@menu/main_menu"
         android:layout_alignParentBottom="true"
-        android:background="#fff"
+        android:background="#EBEFE9"
         android:elevation="@dimen/_10sdp" />
 </RelativeLayout>

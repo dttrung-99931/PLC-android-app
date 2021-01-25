@@ -8,7 +8,8 @@
         android:id="@+id/mViewPager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/mBottomNavMenu"/>
+        android:layout_above="@id/mBottomNavMenu"
+        android:background="#EBEFE9"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/mBottomNavMenu"
@@ -16,6 +17,6 @@
         android:layout_height="wrap_content"
         app:menu="@menu/main_menu"
         android:layout_alignParentBottom="true"
-        android:background="#fff"
+        android:background="#E4E6E3"
         android:elevation="@dimen/_10sdp" />
 </RelativeLayout>
