@@ -6,11 +6,6 @@
         android:icon="@drawable/ic_control"/>
 
     <item
-        android:title="@string/graph"
-        android:id="@+id/item_menu_graph"
-        android:icon="@drawable/ic_graph"/>
-
-    <item
         android:title="@string/report"
         android:id="@+id/item_menu_report"
         android:icon="@drawable/ic_report"/>

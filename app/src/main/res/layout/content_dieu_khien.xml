@@ -23,7 +23,7 @@
             android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/tvAnalog"
+            android:id="@+id/tvProuctionDate"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="76dp"
@@ -48,7 +48,7 @@
             android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/tvDigital"
+            android:id="@+id/tvExpiryDate"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="76dp"
@@ -163,7 +163,7 @@
             android:layout_marginStart="@dimen/_20sdp"/>
 
         <Button
-            android:id="@+id/btnOkTsc2"
+            android:id="@+id/btnUpdateFailureProductLimit"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_30sdp"
             android:text="OK"

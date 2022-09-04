@@ -110,8 +110,11 @@ class GraphFragment : Fragment(), OnChartValueSelectedListener {
     private fun repeatUpdateTs() {
         api.getTs().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
-                ts = response.toFloat()
-                mainActivity.tsLD.postValue(ts)
+                try {
+                    ts = response.toFloat()
+                    mainActivity.tsLD.postValue(ts)
+                } catch (Ignored: Exception){
+                }
             }
         })
         handler.postDelayed(::repeatUpdateTs, 1000)

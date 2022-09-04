@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,14 +13,14 @@
             android:id="@+id/imageView"
             android:layout_width="76dp"
             android:layout_height="107dp"
+            android:layout_marginStart="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.012"
-            app:srcCompat="@drawable/logo"
-            android:layout_marginStart="@dimen/_5sdp"/>
+            app:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/textView"
@@ -51,19 +52,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="4dp"
+            android:gravity="center"
             android:text="HO CHI MINH CITY UNIVERSITY OF TRANSPORT"
             android:textColor="#EC0505"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            android:gravity="center"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="Giám sát và điều khiển động cơ theo cấp tốc độ."
+            android:text="Giám sát hệ thống"
             android:textColor="#0ECD15"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +79,7 @@
             android:layout_marginStart="@dimen/_18sdp"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_15sdp"
-            android:text="- Giá trị analog gửi về:"
+            android:text="Ngày sản xuất:"
             android:textColor="#07197E"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,11 +92,38 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="- Giá trị digital gửi về:"
+            android:text="Hạn sử dụng:"
             android:textColor="#07197E"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/textViewExpiryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Số sản phẩm lỗi:"
+            android:textColor="#07197E"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textViewControl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Điều khiển hệ thống"
+            android:textColor="#0ECD15"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.481"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewExpiryDate" />
+
 
         <TextView
             android:id="@+id/textView10"
@@ -104,63 +132,39 @@
             android:layout_marginStart="@dimen/_18sdp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:text="- Giá trị tần số cấp 1:"
-            android:textColor="#0E8013"
+            android:text="Số lượng sản phẩm lỗi để ngưng hệ thống:"
+            android:textColor="#000"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewControl" />
+
 
         <TextView
-            android:id="@+id/textView11"
-            android:layout_width="@dimen/_180sdp"
+            android:id="@+id/textViewUpdate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_18sdp"
-            android:layout_marginTop="10dp"
-            android:text="- Nhập giá trị cài đặt cho tần số cấp 1:"
-            android:textColor="#0E8013"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Nhập số lượng:"
+            android:textColor="#000"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="- Giá trị tần số cấp 2:"
-            android:textColor="#B3700E"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="@dimen/_180sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="- Nhập giá trị cài đặt cho tần số cấp 2:"
-            android:textColor="#B3700E"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <EditText
             android:id="@+id/edtTsc2"
             android:layout_width="50dp"
             android:layout_height="34dp"
-            android:layout_marginTop="388dp"
+            android:layout_marginLeft="56dp"
             android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.759"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="10"
+            app:layout_constraintLeft_toRightOf="@id/textViewUpdate"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewUpdate"
+            android:background="@drawable/bg_edittext_border"/>
 
         <Button
-            android:id="@+id/btnOkTsc2"
+            android:id="@+id/btnUpdateFailureProductLimit"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
@@ -171,81 +175,137 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="409dp"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="404dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnUpdateFailureProductLimit" />
+
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="409dp"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="404dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnUpdateFailureProductLimit" />
+
+      
         <Button
-            android:id="@+id/btnOkTssc1"
+            android:id="@+id/btnTurnOn"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="124dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
             android:insetTop="3sp"
             android:insetBottom="3sp"
             android:text="OK"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewOn" />
 
         <TextView
-            android:id="@+id/tvAnalog"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="76dp"
-            android:text="100"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <TextView
-            android:id="@+id/tvDigital"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="76dp"
-            android:text="100"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnalog" />
-
-        <TextView
-            android:id="@+id/tvTssc1"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_70sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDigital"
-            android:text="100"/>
-
-        <EditText
-            android:id="@+id/edtTssc1"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_220sdp"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.759"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvTsc2"
-            android:layout_width="50dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="76dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11"
-            android:text="100"/>
-
-        <TextView
-            android:id="@+id/tvDcc"
+            android:id="@+id/textViewOn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="@dimen/_18sdp"
             android:layout_marginTop="20dp"
-            android:text="- Giá trị tần số cấp 2:"
-            android:textColor="#9C27B0"
+            android:text="Điều khiển hệ thống (ON)"
+            android:textColor="#000"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+
+        <TextView
+            android:id="@+id/tvEnterON0Or1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_18sdp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Nhập giá trị 0 hoặc 1: "
+            android:textColor="#000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOn" />
+
+        <EditText
+            android:id="@+id/edtOn"
+            android:layout_width="50dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:inputType="number"
+            android:text="10"
+            app:layout_constraintLeft_toRightOf="@id/textViewOn"
+            app:layout_constraintTop_toBottomOf="@id/textViewOn"
+            android:background="@drawable/bg_edittext_border" />
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="409dp"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="404dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtOn"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/textViewOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_18sdp"
+            android:layout_marginTop="20dp"
+            android:text="Điều khiển hệ thống (OFF)"
+            android:textColor="#000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+        <TextView
+            android:id="@+id/tvEnterOFF0Or1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_18sdp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Nhập giá trị 0 hoặc 1: "
+            android:textColor="#000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOff" />
+
+        <EditText
+            android:id="@+id/edtOff"
+            android:layout_width="50dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:inputType="number"
+            android:text="10"
+            app:layout_constraintLeft_toRightOf="@id/textViewOff"
+            app:layout_constraintTop_toBottomOf="@id/textViewOff"
+            android:background="@drawable/bg_edittext_border" />
+
+        <Button
+            android:id="@+id/btnTurnOff"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:insetTop="3sp"
+            android:insetBottom="3sp"
+            android:text="OK"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOff" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

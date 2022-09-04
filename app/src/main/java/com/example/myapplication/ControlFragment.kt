@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.api.api
-import kotlinx.android.synthetic.main.content_dieu_khien.*
+import kotlinx.android.synthetic.main.dieu_khien.*
 
 /**
  * Created by Trung on 1/25/2021
@@ -27,7 +27,7 @@ class ControlFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_dieu_khien, container, false)
+        return inflater.inflate(R.layout.dieu_khien, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,14 +66,14 @@ class ControlFragment: Fragment() {
             /** Hàm này được gọi để nhận giá trị analog, khi gọi thành công API */
             override fun onSuccessResponse(analogValue: String) {
                 /** Cập nhật giá trị analog nhận được từ API*/
-                tvAnalog.text = analogValue
+//                tvProuctionDate.text = analogValue
             }
         })
 
         /** Tương tự như API lấy giá trị analog bên trên*/
         api.getDigital().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
-                tvDigital.text = response
+//                tvExpiryDate.text = response
             }
         })
 
@@ -86,26 +86,26 @@ class ControlFragment: Fragment() {
 
     private fun setupViewTsoC1() {
         /** Đăng ký nhận sự kiện khi phím OK của tần số cấp 1 được ấn*/
-        btnOkTssc1.setOnClickListener {
-            /** Lây giá trị tsc1(tần số cấp 1) đã được nhập*/
-            val tsc1: Int = edtTssc1.text.toString().toInt()
-
-            if (tsc1 > 60) {
-                showWarningDialog(R.string.warning_tan_so)
-                return@setOnClickListener
-            }
-            /** Gọi API set tsc1*/
-            api.setTssc1(tsc1).enqueue(
-                object : StringCallback<String?>() {
-                    override fun onSuccessResponse(response: String) {
-                        /** Gọi hàm update tần số cấp 1 khi gọi API set tsc1 thành công*/
-                        updateTsoC1()
-                    }
-                }
-            )
-        }
-
-        updateTsoC1()
+//        btnOkTssc1.setOnClickListener {
+//            /** Lây giá trị tsc1(tần số cấp 1) đã được nhập*/
+//            val tsc1: Int = edtTssc1.text.toString().toInt()
+//
+//            if (tsc1 > 60) {
+//                showWarningDialog(R.string.warning_tan_so)
+//                return@setOnClickListener
+//            }
+//            /** Gọi API set tsc1*/
+//            api.setTssc1(tsc1).enqueue(
+//                object : StringCallback<String?>() {
+//                    override fun onSuccessResponse(response: String) {
+//                        /** Gọi hàm update tần số cấp 1 khi gọi API set tsc1 thành công*/
+//                        updateTsoC1()
+//                    }
+//                }
+//            )
+//        }
+//
+//        updateTsoC1()
     }
 
     private lateinit var alertDialog: AlertDialog
@@ -125,7 +125,7 @@ class ControlFragment: Fragment() {
             /** Hàm được gọi khi API tsc1 trả về kết quả*/
             override fun onSuccessResponse(response: String) {
                 /** Cập nhật tần số cấp 1 trả vể về từ API lên giao diện*/
-                tvTssc1.text = response
+//                tvTssc1.text = response
 
                 /** Lặp lịch gọi lại hàm [updateTsoC1] sau 1 giấy*/
                 handler.postDelayed(
@@ -137,7 +137,7 @@ class ControlFragment: Fragment() {
     }
 
     private fun setupViewTsoC2() {
-        btnOkTsc2.setOnClickListener {
+        btnUpdateFailureProductLimit.setOnClickListener {
             val tsc2: Int = edtTsc2.text.toString().toInt()
             if (tsc2 > 60) {
                 showWarningDialog(R.string.warning_tan_so)
@@ -158,7 +158,7 @@ class ControlFragment: Fragment() {
     private fun updateTsoC2() {
         api.getTsc2().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
-                tvTsc2.text = response
+//                tvTsc2.text = response
                 handler.postDelayed(
                     {updateTsoC2() },
                     1000
@@ -168,24 +168,24 @@ class ControlFragment: Fragment() {
     }
 
     private fun setupViewBatDc() {
-        swDcc.setOnCheckedChangeListener { buttonView, isChecked ->
-            val bat: Int = if (isChecked) 1 else 0
-            api.setBatDc(bat).enqueue(
-                object : StringCallback<String?>() {
-                    override fun onSuccessResponse(response: String) {
-                        updateBatDc()
-                    }
-                }
-            )
-        }
-        updateBatDc()
+//        swDcc.setOnCheckedChangeListener { buttonView, isChecked ->
+//            val bat: Int = if (isChecked) 1 else 0
+//            api.setBatDc(bat).enqueue(
+//                object : StringCallback<String?>() {
+//                    override fun onSuccessResponse(response: String) {
+//                        updateBatDc()
+//                    }
+//                }
+//            )
+//        }
+//        updateBatDc()
     }
 
     private fun updateBatDc() {
         api.getBatDc().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
                 val bat = response == "1"
-                cbDcc.isChecked = bat
+//                cbDcc.isChecked = bat
                 handler.postDelayed(
                     {updateBatDc() },
                     1000
@@ -195,28 +195,28 @@ class ControlFragment: Fragment() {
     }
 
     private fun setupViewTatDc() {
-        swTdc.setOnCheckedChangeListener { buttonView, isChecked ->
-            val bat: Int = if (isChecked) 1 else 0
-            api.setTatDc(bat).enqueue(
-                object : StringCallback<String?>() {
-                    override fun onSuccessResponse(response: String) {
-                        updateTatDc()
-                    }
-                }
-            )
-        }
-        updateTatDc()
+//        swTdc.setOnCheckedChangeListener { buttonView, isChecked ->
+//            val bat: Int = if (isChecked) 1 else 0
+//            api.setTatDc(bat).enqueue(
+//                object : StringCallback<String?>() {
+//                    override fun onSuccessResponse(response: String) {
+//                        updateTatDc()
+//                    }
+//                }
+//            )
+//        }
+//        updateTatDc()
     }
 
     private fun updateTatDc() {
         api.getTatDc().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
                 val tat = response == "1"
-                cbTdc.isChecked = tat
-                handler.postDelayed(
-                    {updateTatDc() },
-                    1000
-                )
+//                cbTdc.isChecked = tat
+//                handler.postDelayed(
+//                    {updateTatDc() },
+//                    1000
+//                )
             }
         })
     }

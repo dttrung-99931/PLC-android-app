@@ -56,7 +56,6 @@ class MainActivity: AppCompatActivity() {
         mBottomNavMenu.setOnNavigationItemSelectedListener {
             val currentItemIndex = when (it.itemId) {
                 R.id.item_menu_home -> 0
-                R.id.item_menu_graph -> 1
                 else -> 2
             }
             mViewPager2.setCurrentItem(currentItemIndex, true)
