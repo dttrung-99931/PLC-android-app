@@ -42,9 +42,12 @@ interface ApiService {
     @GET("Tam.html")
     fun getTs(): Call<String>
 
-    @GET("rs_analog.html")
-    fun getAnalog(): Call<String>
+    @GET("NSX.html")
+    fun getNsx(): Call<String>
 
-    @GET("rs_digital.html")
-    fun getDigital(): Call<String>
+    @GET("HSD.html")
+    fun getHsd(): Call<String>
+
+    @GET("SL_Error.html")
+    fun getSoSpLoi(): Call<String>
 }

@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Created by Trung on 1/25/2021
  */
 val api: ApiService = Retrofit.Builder()
-    .baseUrl("http://1.55.84.88/awp/")
+    .baseUrl("http://lvtnlocvi123.hopto.org/awp//")
     .addConverterFactory(GsonConverterFactory.create())
     .build()
     .create(ApiService::class.java)

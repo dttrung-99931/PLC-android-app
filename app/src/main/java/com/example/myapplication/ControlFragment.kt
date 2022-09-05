@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.api.api
 import kotlinx.android.synthetic.main.dieu_khien.*
+import retrofit2.Call
 
 /**
  * Created by Trung on 1/25/2021
@@ -45,11 +46,12 @@ class ControlFragment: Fragment() {
 
     /** Setup cho các thành phần điều khiển*/
     private fun setupViews() {
-        /** Cài đặt Cập nhật liên tục analog và digital*/
-        updateAnalogAndDigital()
+        /** Cài đặt Cập nhật liên tục nsx, hsd & so sp loi*/
+        updateNsxHsdAndSphamLoi()
 
-        /** Cài đặt xủ lý tần số cấp 1*/
-        setupViewTsoC1()
+        /** Cài đặt view đặt sl sp lỗi giới hạn*/
+        setupViewSlSPLoiGioiHan()
+
         /** ....*/
         setupViewTsoC2()
 
@@ -60,52 +62,68 @@ class ControlFragment: Fragment() {
         setupViewTatDc()
     }
 
-    private fun updateAnalogAndDigital() {
+    private fun updateNsxHsdAndSphamLoi() {
         /** Goi API giá trị analog */
-        api.getAnalog().enqueue(object : StringCallback<String?>() {
-            /** Hàm này được gọi để nhận giá trị analog, khi gọi thành công API */
+        api.getNsx().enqueue(object : StringCallback<String?>() {
+            /** Hàm này được gọi để nhận giá trị nsx, khi gọi thành công API */
             override fun onSuccessResponse(analogValue: String) {
                 /** Cập nhật giá trị analog nhận được từ API*/
-//                tvProuctionDate.text = analogValue
+                tvNsx.text = analogValue
+            }
+            override fun onFailure(call: Call<String?>, t: Throwable) {
+                tvNsx.text = ""
+                super.onFailure(call, t)
+            }
+        })
+
+        /** Tương tự như API lấy giá trị nsx bên trên*/
+        api.getHsd().enqueue(object : StringCallback<String?>() {
+            override fun onSuccessResponse(response: String) {
+                tvHsd.text = response
+            }
+
+            override fun onFailure(call: Call<String?>, t: Throwable) {
+                tvHsd.text = ""
+                super.onFailure(call, t)
             }
         })
 
         /** Tương tự như API lấy giá trị analog bên trên*/
-        api.getDigital().enqueue(object : StringCallback<String?>() {
+        api.getSoSpLoi().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
-//                tvExpiryDate.text = response
+                tvSoSpLoi.text = response
+            }
+
+            override fun onFailure(call: Call<String?>, t: Throwable) {
+                tvSoSpLoi.text = "0"
+                super.onFailure(call, t)
             }
         })
 
-        /** Lập lịch gọi lại hàm cập nhật analog, digital [updateAnalogAndDigital] sau mỗi 1 giấy*/
+        /** Lập lịch gọi lại hàm cập nhật analog, digital [updateNsxHsdAndSphamLoi] sau mỗi 1 giấy*/
         handler.postDelayed(
-            {updateAnalogAndDigital()},
+            {updateNsxHsdAndSphamLoi()},
             1000
         )
     }
 
-    private fun setupViewTsoC1() {
-        /** Đăng ký nhận sự kiện khi phím OK của tần số cấp 1 được ấn*/
-//        btnOkTssc1.setOnClickListener {
-//            /** Lây giá trị tsc1(tần số cấp 1) đã được nhập*/
-//            val tsc1: Int = edtTssc1.text.toString().toInt()
-//
-//            if (tsc1 > 60) {
-//                showWarningDialog(R.string.warning_tan_so)
-//                return@setOnClickListener
-//            }
-//            /** Gọi API set tsc1*/
-//            api.setTssc1(tsc1).enqueue(
-//                object : StringCallback<String?>() {
-//                    override fun onSuccessResponse(response: String) {
-//                        /** Gọi hàm update tần số cấp 1 khi gọi API set tsc1 thành công*/
-//                        updateTsoC1()
-//                    }
-//                }
-//            )
-//        }
-//
-//        updateTsoC1()
+    private fun setupViewSlSPLoiGioiHan() {
+        btnUpdateFailureProductLimit.setOnClickListener {
+            /** Lây giá trị tsc1(tần số cấp 1) đã được nhập*/
+            val limit: Int = edtFailureProductionLimit.text.toString().toInt()
+
+            /** Gọi API set tsc1*/
+            api.setTssc1(limit).enqueue(
+                object : StringCallback<String?>() {
+                    override fun onSuccessResponse(response: String) {
+                        /** Gọi hàm update tần số cấp 1 khi gọi API set tsc1 thành công*/
+                        updateTsoC1()
+                    }
+                }
+            )
+        }
+
+        updateTsoC1()
     }
 
     private lateinit var alertDialog: AlertDialog
@@ -138,7 +156,7 @@ class ControlFragment: Fragment() {
 
     private fun setupViewTsoC2() {
         btnUpdateFailureProductLimit.setOnClickListener {
-            val tsc2: Int = edtTsc2.text.toString().toInt()
+            val tsc2: Int = edtFailureProductionLimit.text.toString().toInt()
             if (tsc2 > 60) {
                 showWarningDialog(R.string.warning_tan_so)
                 return@setOnClickListener
