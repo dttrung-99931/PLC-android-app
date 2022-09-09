@@ -11,20 +11,30 @@
         android:paddingHorizontal="@dimen/_10sdp">
 
         <TextView
-            android:id="@+id/mTvTime"
+            android:id="@+id/tvSttReport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="19:53"
+            android:text="0"
             android:textSize="@dimen/_16ssp"
             android:textColor="#000"
             android:layout_weight="2"
             android:gravity="center"/>
 
         <TextView
-            android:id="@+id/mTvTs"
+            android:id="@+id/tvNsxReport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TSC1: 18hz"
+            android:text="3/1/1999"
+            android:textSize="@dimen/_16ssp"
+            android:textColor="#000"
+            android:layout_weight="2"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tvHsdReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1/9/1999"
             android:textSize="@dimen/_16ssp"
             android:textColor="#000"
             android:layout_weight="2"

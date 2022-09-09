@@ -16,8 +16,10 @@ class MainActivity: AppCompatActivity() {
     /** 2 biến lưu ts truyền từ [GraphFragment] lên*/
     val tsLD = MutableLiveData<Float>()
 
+    val validNsxHsd = MutableLiveData<List<String>>()
+
     /** Lưu dữ liệu report, được sử dụng ở [ReportFragment]*/
-    val reportData = mutableMapOf<Long, Float>()
+    val reportData = mutableListOf<List<String>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +30,11 @@ class MainActivity: AppCompatActivity() {
 
     /** Lưu lại các [tsLD] lấy từ [GraphFragment] truyền lên*/
     private fun observeToGatherReportData() {
-        tsLD.observe(this, Observer {
-            val curSec = getCurrentSeconds()
-            reportData[curSec] = it
+        validNsxHsd.observe(this, Observer {
+            reportData.add(0, it)
         })
     }
 
-    private fun getCurrentSeconds(): Long {
-        return System.currentTimeMillis()/1000
-    }
 
     /** Cài đặt các thành phân giao diện*/
     private fun setupViews() {

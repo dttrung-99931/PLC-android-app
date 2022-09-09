@@ -67,7 +67,7 @@ class ReportFragment: Fragment() {
 
     /** Refresh lại list report*/
     private fun refresh() {
-        reportAdapter.setReportData(mainActivity.reportData.toList())
+//        reportAdapter.setReportData(mainActivity.reportData.toList())
         mRecyclerView.scrollToPosition(reportAdapter.itemCount - 1)
     }
 

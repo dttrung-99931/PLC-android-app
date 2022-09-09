@@ -11,9 +11,22 @@ import retrofit2.http.POST
  * Created by Trung on 1/22/2021
  */
 interface ApiService {
+
     @FormUrlEncoded
     @POST("rs_value_c1.html")
-    fun setTssc1(@Field("\"value_tan_so\".tan_so_dat_cap_1") tssc1: Int): Call<String>
+    // TODO: FIx param name
+    fun setSoSphamLoiNgungHthong(@Field("\"button\".SL_error") tssc1: Int): Call<String>
+
+    @FormUrlEncoded
+    @POST("ON.html")
+    // TODO: FIx param name
+    fun setSystemOn(@Field("\"button\".OM") value: Int): Call<String>
+
+
+    @FormUrlEncoded
+    @POST("OFF.html")
+    // TODO: FIx param name
+    fun setSystemOff(@Field("\"button\".OFF") value: Int): Call<String>
 
     @FormUrlEncoded
     @POST("rs_value_c2.html")
@@ -50,4 +63,14 @@ interface ApiService {
 
     @GET("SL_Error.html")
     fun getSoSpLoi(): Call<String>
+
+    // TODO: Fix
+    @GET("SL_Error.html")
+    fun getSLSphamLoiNgungHeThong(): Call<String>
+
+    @GET("ON.html")
+    fun getSystemOn(): Call<String>
+
+    @GET("OFF.html")
+    fun getSystemOff(): Call<String>
 }

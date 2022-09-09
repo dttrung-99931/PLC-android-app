@@ -15,18 +15,15 @@ import java.text.SimpleDateFormat
  * Dùng để để load dữ liệu report hiển thị lên giao diện
  */
 class ReportAdapter : RecyclerView.Adapter<ReportAdapter.ReportViewHolder>() {
-    val simpleDataFormatter = SimpleDateFormat("HH:mm:ss")
 
     inner class ReportViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindData(
             position: Int,
             data: Pair<Long, Float>
         ) {
-            itemView.mTvTime.text = simpleDataFormatter.format(
-                data.first * 1000
-            )
+//            itemView.tvNsxReport.text = data
             val ts = "${data.second} hz"
-            itemView.mTvTs.text = ts
+            itemView.tvHsdReport.text = ts
         }
 
     }
