@@ -13,44 +13,13 @@ import retrofit2.http.POST
 interface ApiService {
 
     @FormUrlEncoded
-    @POST("rs_value_c1.html")
-    // TODO: FIx param name
-    fun setSoSphamLoiNgungHthong(@Field("\"button\".SL_error") tssc1: Int): Call<String>
-
-    @FormUrlEncoded
-    @POST("ON.html")
-    // TODO: FIx param name
-    fun setSystemOn(@Field("\"button\".OM") value: Int): Call<String>
+    @POST("Start.html")
+    fun setSystemOn(@Field("\"button\".Start") value: Int): Call<String>
 
 
     @FormUrlEncoded
-    @POST("OFF.html")
-    // TODO: FIx param name
-    fun setSystemOff(@Field("\"button\".OFF") value: Int): Call<String>
-
-    @FormUrlEncoded
-    @POST("rs_value_c2.html")
-    fun setTssc2(@Field("\"value_tan_so\".tan_so_dat_cap_2") tssc2: Int): Call<String>
-
-    @FormUrlEncoded
-    @POST("bat.html")
-    fun setBatDc(@Field("\"control\".start") bat: Int): Call<String>
-
-    @GET("bat.html")
-    fun getBatDc(): Call<String>
-
-    @FormUrlEncoded
-    @POST("tat.html")
-    fun setTatDc(@Field("\"control\".stop") bat: Int): Call<String>
-
-    @GET("tat.html")
-    fun getTatDc(): Call<String>
-
-    @GET("rs_value_c1.html")
-    fun getTssc1(): Call<String>
-
-    @GET("rs_value_c2.html")
-    fun getTsc2(): Call<String>
+    @POST("Stop.html")
+    fun setSystemOff(@Field("\"button\".Stop") value: Int): Call<String>
 
     @GET("Tam.html")
     fun getTs(): Call<String>
@@ -64,13 +33,16 @@ interface ApiService {
     @GET("SL_Error.html")
     fun getSoSpLoi(): Call<String>
 
-    // TODO: Fix
-    @GET("SL_Error.html")
+    @GET("Set_Error.html")
     fun getSLSphamLoiNgungHeThong(): Call<String>
 
-    @GET("ON.html")
+    @FormUrlEncoded
+    @POST("Set_Error.html")
+    fun setSoSphamLoiNgungHthong(@Field("\"SL_Error\".Set_Error") tssc1: Int): Call<String>
+
+    @GET("Start.html")
     fun getSystemOn(): Call<String>
 
-    @GET("OFF.html")
+    @GET("Stop.html")
     fun getSystemOff(): Call<String>
 }

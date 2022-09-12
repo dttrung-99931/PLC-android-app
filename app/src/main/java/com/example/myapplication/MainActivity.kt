@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -49,14 +50,19 @@ class MainActivity: AppCompatActivity() {
         mViewPager2.isUserInputEnabled = false
     }
 
+    var showRefreshInstructionCount = 0
     /** Cài đặt menu ở dưới đáy*/
     private fun setupBottomNavMenu() {
         mBottomNavMenu.setOnNavigationItemSelectedListener {
             val currentItemIndex = when (it.itemId) {
                 R.id.item_menu_home -> 0
-                else -> 2
+                else -> 1
             }
             mViewPager2.setCurrentItem(currentItemIndex, true)
+            if (currentItemIndex == 1 && showRefreshInstructionCount < 2){
+                Toast.makeText(this, "Kéo xuống để reload report", Toast.LENGTH_LONG).show()
+                showRefreshInstructionCount++
+            }
             true
         }
     }

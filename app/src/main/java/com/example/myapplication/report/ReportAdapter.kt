@@ -19,16 +19,16 @@ class ReportAdapter : RecyclerView.Adapter<ReportAdapter.ReportViewHolder>() {
     inner class ReportViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindData(
             position: Int,
-            data: Pair<Long, Float>
+            data: List<String>
         ) {
-//            itemView.tvNsxReport.text = data
-            val ts = "${data.second} hz"
-            itemView.tvHsdReport.text = ts
+            itemView.tvNsxReport.text = data[1]
+            itemView.tvHsdReport.text = data[2]
+            itemView.tvSttReport.text = data[0]
         }
 
     }
 
-    val reportData = mutableListOf<Pair<Long, Float>>()
+    val reportData = mutableListOf<List<String>>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_report, parent, false)
@@ -43,9 +43,9 @@ class ReportAdapter : RecyclerView.Adapter<ReportAdapter.ReportViewHolder>() {
         holder.bindData(position, reportData[position])
     }
 
-    fun setReportData(reportData: List<Pair<Long,Float>>) {
+    fun setReportData(add: List<List<String>>) {
         this.reportData.clear()
-        this.reportData.addAll(reportData)
+        this.reportData.addAll(add)
         notifyDataSetChanged()
     }
 }

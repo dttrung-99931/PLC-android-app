@@ -186,7 +186,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Số lượng sản phẩm lỗi để ngưng hệ thống:"
+                android:text="SL sản phẩm lỗi ngưng hệ thống:"
                 android:textColor="#000"
                 android:textSize="16sp" />
 
@@ -221,7 +221,6 @@
             android:layout_height="34dp"
             android:layout_marginLeft="56dp"
             android:inputType="number"
-            android:text="10"
             app:layout_constraintLeft_toRightOf="@id/textViewUpdate"
             app:layout_constraintBottom_toBottomOf="@+id/textViewUpdate"
             android:background="@drawable/bg_edittext_border"/>
@@ -322,7 +321,6 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_edittext_border"
             android:inputType="number"
-            android:text="10"
             app:layout_constraintLeft_toRightOf="@id/tvEnterON0Or1"
             app:layout_constraintTop_toBottomOf="@id/textViewOn" />
 
@@ -384,7 +382,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="12dp"
             android:inputType="number"
-            android:text="10"
             app:layout_constraintLeft_toRightOf="@id/textViewOff"
             app:layout_constraintTop_toBottomOf="@id/textViewOff"
             android:background="@drawable/bg_edittext_border" />

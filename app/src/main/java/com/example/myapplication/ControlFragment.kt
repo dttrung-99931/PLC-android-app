@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication.api.api
 import kotlinx.android.synthetic.main.dieu_khien.*
 import retrofit2.Call
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by Trung on 1/25/2021
@@ -119,10 +121,13 @@ class ControlFragment: Fragment() {
         api.getSoSpLoi().enqueue(object : StringCallback<String?>() {
             override fun onSuccessResponse(response: String) {
                 tvSoSpLoi.text = response
+                nsx = response
+                collectNsxHsdToReport()
             }
 
             override fun onFailure(call: Call<String?>, t: Throwable) {
-                tvSoSpLoi.text = "0"
+                tvNsx.text = ""
+                nsx = ""
                 super.onFailure(call, t)
             }
         })
@@ -136,14 +141,17 @@ class ControlFragment: Fragment() {
 
     private fun collectNsxHsdToReport() {
         if (nsx.isNotEmpty() && hsd.isNotEmpty()){
-            mainActivity.validNsxHsd.postValue(listOf(nsx, hsd))
+            val datetime = Calendar.getInstance()
+            val dateFormat = SimpleDateFormat("dd/MM HH:mm:ss")
+            mainActivity.validNsxHsd.postValue(listOf(dateFormat.format(datetime.time), nsx, hsd))
             nsx = ""
-            hsd = ""
+            hsd  = ""
         }
     }
 
     private fun setupControlView(
-        controlBtn: Button, intEdt: EditText, setAPI: (Int) ->  Call<String>, valueTv: TextView, getAPI: () ->  Call<String>) {
+        controlBtn: Button, intEdt: EditText, setAPI: (Int) ->  Call<String>,
+        valueTv: TextView, getAPI: () ->  Call<String>) {
 
         controlBtn.setOnClickListener {
             /** Lây giá trị tsc1(tần số cấp 1) đã được nhập*/

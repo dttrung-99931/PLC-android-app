@@ -14,9 +14,10 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/mBottomNavMenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_42sdp"
         app:menu="@menu/main_menu"
         android:layout_alignParentBottom="true"
         android:background="#E4E6E3"
-        android:elevation="@dimen/_10sdp" />
+        android:elevation="@dimen/_10sdp"
+        app:itemIconSize="@dimen/_16sdp" />
 </RelativeLayout>
